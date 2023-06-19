@@ -1,9 +1,10 @@
+import useRoutes from './hooks/useRoutes';
 import './styles/App.scss';
+import React from 'react';
 
-function App() {
-  return (
-    <div>TEST</div>
-  );
-}
+const App: React.FC = () => {
+  const routes = useRoutes();
+  return <div>{routes}</div>;
+};
 
 export default App;
