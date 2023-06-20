@@ -1,9 +1,8 @@
-import React, { ReactNode, useState } from 'react';
-
+import React from 'react';
 const HomePage: React.FC = () => {
   return (
     <div>
-      Home Page
+      HomePage
     </div>
   )
 };
