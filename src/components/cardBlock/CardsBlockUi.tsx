@@ -12,7 +12,7 @@ interface CardsBlockPresentationProps {
   renderMessages: React.ReactNode;
 }
 
-const CardsBlockUi: React.FC<CardsBlockPresentationProps> = React.memo(({
+const CardsBlockUi: React.FC<CardsBlockPresentationProps> = ({
   renderMessages,
   loading,
   delayLoad,
@@ -33,6 +33,6 @@ const CardsBlockUi: React.FC<CardsBlockPresentationProps> = React.memo(({
       </div>
     </div>
   );
-});
+};
 
 export default CardsBlockUi;
