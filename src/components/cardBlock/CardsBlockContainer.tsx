@@ -1,4 +1,4 @@
-import React, { lazy, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelectorMessages } from '../../store/selectors';
 import useMessages from '../../helpers/hooks/useMessage';
 import BlockCardContainer from './blockCard/BlockCardContainer';
