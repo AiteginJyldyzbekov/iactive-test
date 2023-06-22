@@ -19,11 +19,6 @@ const CardsBlockContainer = lazy(async () => {
 const HomePage: React.FC = () => {
   return (
     <>
-      <Suspense fallback={<CircularProgress sx={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%'
-      }} />}>
         <Header />
         <Suspense fallback={<CircularProgress sx={{
           position: 'absolute',
@@ -32,7 +27,6 @@ const HomePage: React.FC = () => {
         }} />}>
           <CardsBlockContainer />
         </Suspense>
-      </Suspense>
     </>
   )
 };
