@@ -25,7 +25,13 @@ const HomePage: React.FC = () => {
         left: '50%'
       }} />}>
         <Header />
-        <CardsBlockContainer />
+        <Suspense fallback={<CircularProgress sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%'
+        }} />}>
+          <CardsBlockContainer />
+        </Suspense>
       </Suspense>
     </>
   )
