@@ -7,7 +7,7 @@ import { getMessageTime } from '../../../helpers/time';
 import EllipsisText from '../../elipsisText/ElipsisText';
 import { BlockCardUiProps } from '../../../types/types';
 
-const BlockCardUi: React.FC<BlockCardUiProps> = ({
+const BlockCardUi: React.FC<BlockCardUiProps> = React.memo(({
   attachments,
   author,
   channel,
@@ -83,6 +83,6 @@ const BlockCardUi: React.FC<BlockCardUiProps> = ({
       </footer>
     </section>
   );
-};
+});
 
 export default BlockCardUi;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BlockCardUi from './BlockCardUi';
 import { BlockCardContainerProps } from '../../../types/types';
 
-const BlockCardContainer: React.FC<BlockCardContainerProps> = ({
+const BlockCardContainer: React.FC<BlockCardContainerProps> = React.memo(({
   id,
   attachments,
   author,
@@ -34,6 +34,6 @@ const BlockCardContainer: React.FC<BlockCardContainerProps> = ({
       onAddToFavorite={addToFavorite}
     />
   );
-};
+})
 
 export default BlockCardContainer;

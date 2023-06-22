@@ -12,7 +12,7 @@ interface CardsBlockPresentationProps {
   renderMessages: React.ReactNode;
 }
 
-const CardsBlockUi: React.FC<CardsBlockPresentationProps> = ({
+const CardsBlockUi: React.FC<CardsBlockPresentationProps> = React.memo(({
   renderMessages,
   loading,
   delayLoad,
@@ -20,7 +20,7 @@ const CardsBlockUi: React.FC<CardsBlockPresentationProps> = ({
 
   const renderLoader = () => {
     if (loading === LoadingStatus.pending || delayLoad) {
-      return <CircularProgress/>;
+      return <CircularProgress />;
     }
   };
 
@@ -29,9 +29,10 @@ const CardsBlockUi: React.FC<CardsBlockPresentationProps> = ({
       <div className={scss.messages__wrapper}>
         <div className={scss.loader__container}>{renderLoader()}</div>
         {renderMessages}
+        <div className={scss.loader__container}>{renderLoader()}</div>
       </div>
     </div>
   );
-};
+});
 
 export default CardsBlockUi;
