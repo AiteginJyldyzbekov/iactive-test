@@ -10,27 +10,26 @@ type InitialStateType = {
   ascending: string;
 };
 
-export const getMessages = createAsyncThunk(
-  'messages/getMessages',
+export const fetchMessages = createAsyncThunk(
+  'messages/fetchMessages',
   async (data: FormData) => {
     const response = await Api.message.getMessages(data);
     return response;
   }
 );
 
-export const getNewMessages = createAsyncThunk(
-  'messages/getNewMessages',
+export const fetchNewMessages = createAsyncThunk(
+  'messages/fetchNewMessages',
   async (data: FormData) => {
     const response = await Api.message.getMessages(data);
     return response;
   }
 );
 
-export const getOldMessages = createAsyncThunk(
-  'messages/getOldMessages',
+export const fetchOldMessages = createAsyncThunk(
+  'messages/fetchOldMessages',
   async (data: FormData) => {
     const response = await Api.message.getMessages(data);
-    console.log(response)
     return response;
   }
 );
@@ -42,7 +41,7 @@ const initialState: InitialStateType = {
   error: null,
 };
 export const messagesSlice = createSlice({
-  name: "subscription",
+  name: "messages",
   initialState,
   reducers: {
     setNewMessage: (state, action) => {
@@ -67,23 +66,23 @@ export const messagesSlice = createSlice({
   },
   extraReducers: (builder) => {
     // Get all messages
-    builder.addCase(getMessages.pending, (state) => {
+    builder.addCase(fetchMessages.pending, (state) => {
       state.loading = LoadingStatus.pending;
     });
-    builder.addCase(getMessages.fulfilled, (state, action) => {
+    builder.addCase(fetchMessages.fulfilled, (state, action) => {
       state.loading = LoadingStatus.succeeded;
       state.messages = action.payload.Messages;
     });
-    builder.addCase(getMessages.rejected, (state, action) => {
+    builder.addCase(fetchMessages.rejected, (state, action) => {
       state.loading = LoadingStatus.failed;
       state.error = action.error.message as string;
     });
 
     // Get new messages
-    builder.addCase(getNewMessages.pending, (state) => {
+    builder.addCase(fetchNewMessages.pending, (state) => {
       state.loading = LoadingStatus.pending;
     });
-    builder.addCase(getNewMessages.fulfilled, (state, action) => {
+    builder.addCase(fetchNewMessages.fulfilled, (state, action) => {
       const isNewMessages = String(action.payload) === "no message";
       if (isNewMessages) {
         state.messages = state.messages;
@@ -92,36 +91,32 @@ export const messagesSlice = createSlice({
 
         if (state.ascending === "DESC") {
           state.messages = state.messages.concat(newMessages);
-          console.log(state.messages);
         } else {
           state.messages = newMessages.concat(state.messages);
-          console.log(state.messages);
         }
       }
       state.loading = LoadingStatus.succeeded;
 
     });
-    builder.addCase(getNewMessages.rejected, (state, action) => {
+    builder.addCase(fetchNewMessages.rejected, (state, action) => {
       state.loading = LoadingStatus.failed;
       state.error = action.error.message as string;
     });
 
     // Get old messages
-    builder.addCase(getOldMessages.pending, (state) => {
+    builder.addCase(fetchOldMessages.pending, (state) => {
       state.loading = LoadingStatus.pending;
     });
-    builder.addCase(getOldMessages.fulfilled, (state, action) => {
-      state.loading = LoadingStatus.succeeded;
+    builder.addCase(fetchOldMessages.fulfilled, (state, action) => {
       const newMessages = action.payload.Messages?.reverse();
       if (state.ascending === "DESC") {
         state.messages = newMessages.concat(state.messages);
-        console.log(state.messages);
       } else {
         state.messages = state.messages.concat(newMessages);
-        console.log(state.messages);
       }
+      state.loading = LoadingStatus.succeeded;
     });
-    builder.addCase(getOldMessages.rejected, (state, action) => {
+    builder.addCase(fetchOldMessages.rejected, (state, action) => {
       state.loading = LoadingStatus.failed;
       state.error = action.error.message as string;
     });

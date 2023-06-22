@@ -1,41 +1,32 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import scss from "./BlockCard.module.scss"
-import Avatar from '../../../assets/images/Avatar.svg'
-import starIcon from "../../../assets/images/star.svg"
-import { positionBtns } from '../../../constants/BlockCard';
-import { messageType } from '../../../store/types';
+import React, { useMemo } from 'react';
+import scss from './BlockCard.module.scss';
+import Avatar from '../../../assets/images/Avatar.svg';
+import starIcon from '../../../assets/images/star.svg';
+import { positionBtnsData } from '../../../constants/BlockCard';
 import { getMessageTime } from '../../../helpers/time';
 import EllipsisText from '../../elipsisText/ElipsisText';
+import { BlockCardUiProps } from '../../../types/types';
 
-const BlockCard: React.FC<messageType> = ({ attachments,
+const BlockCardUi: React.FC<BlockCardUiProps> = ({
+  attachments,
   author,
   channel,
   content,
   date,
-  id, }) => {
-  const stars = localStorage.getItem("star") as string;
-  const parsedStars = JSON.parse(stars);
-  const [isLiked, setIsLiked] = useState<boolean>(Boolean(parsedStars?.[id]));
-
-  useEffect(() => {
-    localStorage.setItem(
-      "star",
-      JSON.stringify({ ...parsedStars, [id]: isLiked })
-    );
-  }, [isLiked, parsedStars, id]);
-
-  const addToFavorite = () => setIsLiked((prev) => !prev);
-
+  id,
+  isLiked,
+  onAddToFavorite,
+}) => {
   const renderBtns = useMemo(() => {
-    return positionBtns.map((el, index) => (
+    return positionBtnsData.map((el, index) => (
       <img key={`${el.alt}_${index}`} src={el.icon} alt={el.alt} />
     ));
-  }, [positionBtns]);
+  }, []);
 
   const renderUrl = useMemo(() => {
     if (attachments.length) {
-      return attachments.map((item, index) => {
-        if (item.type === "video") {
+      return attachments.map((item) => {
+        if (item.type === 'video') {
           return (
             <video key={item.type} controls>
               <source src={item.url} type="video/mp4" />
@@ -70,32 +61,28 @@ const BlockCard: React.FC<messageType> = ({ attachments,
           <div className={scss.card__header_actions}>
             {renderBtns}
             <img
-              className={`${scss.star} ${isLiked ? scss.active : ""}`}
+              className={`${scss.star} ${isLiked ? scss.active : ''}`}
               src={starIcon}
               alt="star icon"
-              onClick={addToFavorite}
+              onClick={onAddToFavorite}
             />
           </div>
         </div>
       </header>
       <div className={scss.card__content}>
-        <p className={scss.card__content__time}>
-          {getMessageTime(date)}
-        </p>
+        <p className={scss.card__content__time}>{getMessageTime(date)}</p>
         <div className={scss.card__content__mainContent}>
           <EllipsisText len={247}>{content}</EllipsisText>
           {renderUrl}
         </div>
       </div>
       <footer>
-        <span className={`${scss.card__tag} ${scss.active}`}>
-          #Новое
-        </span>
+        <span className={`${scss.card__tag} ${scss.active}`}>#Новое</span>
         &nbsp;
         <span className={scss.card__tag}>#Эксперт</span>
       </footer>
     </section>
-  )
+  );
 };
 
-export default BlockCard;
+export default BlockCardUi;

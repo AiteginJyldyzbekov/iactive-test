@@ -3,7 +3,7 @@ import hideIcon from "../assets/images/hide.svg"
 import settingsIcon from "../assets/images/settings.svg"
 import { positionBtnsType } from '../types/types'
 
-export const positionBtns: positionBtnsType[] = [
+export const positionBtnsData: positionBtnsType[] = [
   {
     icon: arrowIcon,
     alt: 'Send message icon'

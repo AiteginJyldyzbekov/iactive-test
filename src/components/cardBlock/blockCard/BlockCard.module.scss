@@ -14,7 +14,6 @@
     align-items: center;
     justify-content: space-between;
 
-
     .card__header_info {
       display: flex;
       align-items: center;
@@ -31,7 +30,7 @@
           font-weight: 400;
           font-size: 16px;
           line-height: 13px;
-          color: $gray;
+          color: $gray-text;
         }
 
         .user__text {
@@ -39,7 +38,7 @@
           font-weight: 400;
           font-size: 12px;
           line-height: 9px;
-          color: $gray;
+          color: $gray-text;
         }
       }
     }
@@ -92,7 +91,7 @@
 
     .card__content__time {
       width: 40px;
-      color: $gray;
+      color: $gray-text;
     }
 
     .card__content__mainContent {
@@ -103,7 +102,7 @@
       margin-left: 10px;
       line-height: 22px;
       letter-spacing: -0.035em;
-      color: #333333;
+      color: $black-text;
 
       video {
         max-width: 50%;

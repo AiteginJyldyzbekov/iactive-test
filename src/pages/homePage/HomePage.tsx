@@ -1,13 +1,19 @@
-import React, { lazy, useEffect, useState } from 'react';
-import Header from '../../components/header/Header';
+import React, { lazy } from 'react';
 import { Suspense } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+
+const CircularProgress = lazy(async () => {
+  return import('@mui/material/CircularProgress');
+});
+
+const Header = lazy(async () => {
+  return import('../../components/header/Header');
+});
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-const CardsBlock = lazy(async () => {
+const CardsBlockContainer = lazy(async () => {
   // Искусственная задержка на 3 секунды
   await sleep(2000);
-  return import('../../components/cardBlock/CardsBlock');
+  return import('../../components/cardBlock/CardsBlockContainer');
 });
 
 const HomePage: React.FC = () => {
@@ -19,7 +25,7 @@ const HomePage: React.FC = () => {
         left: '50%'
       }} />}>
         <Header />
-        <CardsBlock />
+        <CardsBlockContainer />
       </Suspense>
     </>
   )

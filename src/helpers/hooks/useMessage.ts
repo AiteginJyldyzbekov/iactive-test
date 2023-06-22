@@ -1,5 +1,5 @@
 import { messageType } from '../../store/types';
-import { getMessages, getNewMessages, getOldMessages, setAscending, sortArrayByDate } from "../../store/slices/messageSlice";
+import { fetchMessages, fetchNewMessages, fetchOldMessages, setAscending, sortArrayByDate } from "../../store/slices/messageSlice";
 import { useAppDispatch } from "./hook";
 
 const useMessages = (messages: messageType[]) => {
@@ -8,23 +8,22 @@ const useMessages = (messages: messageType[]) => {
     const data = new FormData();
     data.append("actionName", "MessagesLoad");
     data.append("messageId", "0");
-    dispatch(getMessages(data))
-    console.log(messages)
+    dispatch(fetchMessages(data))
   };
 
-  const getNewMessage = () => {
+  const getNewMessages = () => {
     const lastMessageId = messages?.at(-1)?.id;
     const data = new FormData();
     data.append("actionName", "MessagesLoad");
     data.append("messageId", `${lastMessageId}`);
-    dispatch(getNewMessages(data))
+    dispatch(fetchNewMessages(data))
   };
 
-  const getOldMessage = () => {
+  const getOldMessages = () => {
     const data = new FormData();
     data.set("actionName", "MessagesLoad");
     data.set("oldMessages", String(true));
-    dispatch(getOldMessages(data))
+    dispatch(fetchOldMessages(data))
   };
 
   const sortMessages = (sortDirection: string) => {
@@ -42,7 +41,7 @@ const useMessages = (messages: messageType[]) => {
     }
   };
 
-  return { getFirstMessages, getNewMessage, getOldMessage, sortMessages };
+  return { getFirstMessages, getNewMessages, getOldMessages, sortMessages };
 };
 
 export default useMessages;

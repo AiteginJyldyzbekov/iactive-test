@@ -1,8 +1,4 @@
-// Message types
-type attachmentType = {
-  type: string;
-  url: string;
-};
+import { attachmentType } from "../types/types";
 
 export type messageType = {
   attachments: Array<attachmentType>;

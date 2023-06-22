@@ -1,6 +1,6 @@
 import React from 'react';
 import scss from './Header.module.scss'
-import Select from '../select/Select';
+import SelectContainer from '../select/SelectContainer';
 
 const Header: React.FC = () => {
   return (
@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       <div className='container'>
         <div className={scss.wrapper__navs}>
           <p>Лента сообщений</p>
-          <Select />
+          <SelectContainer />
         </div>
       </div>
     </div>
