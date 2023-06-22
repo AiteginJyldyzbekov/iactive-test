@@ -1,5 +1,5 @@
-import { messageType } from './../store/types';
-import { getMessages, getNewMessages, getOldMessages } from "./../store/slices/messageSlice";
+import { messageType } from '../../store/types';
+import { getMessages, getNewMessages, getOldMessages, setAscending, sortArrayByDate } from "../../store/slices/messageSlice";
 import { useAppDispatch } from "./hook";
 
 const useMessages = (messages: messageType[]) => {
@@ -27,20 +27,22 @@ const useMessages = (messages: messageType[]) => {
     dispatch(getOldMessages(data))
   };
 
-  // const sortMessages = (sortDirection: string) => {
-  //   switch (sortDirection) {
-  //     case "ASC":
-  //       store.dispatch(sortArrayByDate({ messages, ascending: false }));
-  //       break;
-  //     case "DESC":
-  //       store.dispatch(sortArrayByDate({ messages, ascending: true }));
-  //       break;
-  //     default:
-  //       return messages;
-  //   }
-  // };
+  const sortMessages = (sortDirection: string) => {
+    switch (sortDirection) {
+      case "ASC":
+        dispatch(sortArrayByDate({ messages, ascending: false }));
+        dispatch(setAscending("ASC"))
+        break;
+      case "DESC":
+        dispatch(sortArrayByDate({ messages, ascending: true }));
+        dispatch(setAscending("DESC"))
+        break;
+      default:
+        return messages;
+    }
+  };
 
-  return { getFirstMessages, getNewMessage, getOldMessage };
+  return { getFirstMessages, getNewMessage, getOldMessage, sortMessages };
 };
 
 export default useMessages;

@@ -1,4 +1,4 @@
-import useRoutes from './hooks/useRoutes';
+import useRoutes from './helpers/hooks/useRoutes';
 import './styles/App.scss';
 import React from 'react';
 

@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+
+.wrapper {
+  height: 70px;
+  border-bottom: 1px solid gray;
+  display: flex;
+  align-items: center;
+  background-color: $main_blue;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  .wrapper__navs {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      color: white;
+    }
+  }
+}
