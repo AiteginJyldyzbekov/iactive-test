@@ -91,10 +91,10 @@ export const messagesSlice = createSlice({
         const newMessages = action.payload.Messages?.reverse();
 
         if (state.ascending === "DESC") {
-          state.messages = newMessages.concat(state.messages);
+          state.messages = state.messages.concat(newMessages);
           console.log(state.messages);
         } else {
-          state.messages = state.messages.concat(newMessages);
+          state.messages = newMessages.concat(state.messages);
           console.log(state.messages);
         }
       }
