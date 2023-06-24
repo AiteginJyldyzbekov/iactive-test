@@ -11,7 +11,7 @@ const Header = lazy(async () => {
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const CardsBlockContainer = lazy(async () => {
-  // Искусственная задержка на 3 секунды
+  // Искусственная задержка на 2 секунды
   await sleep(2000);
   return import('../../components/cardBlock/CardsBlockContainer');
 });
